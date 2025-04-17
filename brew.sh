@@ -134,6 +134,7 @@ apps=(
     "rectangle"
     "postman"
     "keyboardcleantool"
+    "cursor"
 )
 
 # Loop over the array to install each application.
