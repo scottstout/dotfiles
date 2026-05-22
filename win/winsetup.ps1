@@ -29,7 +29,8 @@ scoop install main/go `
   extras/mkcert `
   extras/notepadplusplus `
   main/terraform `
-  main/oh-my-posh `
+  #main/oh-my-posh `
+  main/starship ` # I think starship might be better. I'm using this on mac
   main/yq 
 
  # Manually go into terminal defaults > Apppearance and set the font to MesloLGL NF Mono 
@@ -69,4 +70,5 @@ notepad $PROFILE
 New-Item -Path $PROFILE -Type File -Force
 
 # add this to the the file
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gruvbox.omp.json" | Invoke-Expression
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gruvbox.omp.json" | Invoke-Expression
+Invoke-Expression (&starship init powershell)
