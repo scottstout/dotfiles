@@ -78,6 +78,8 @@ brew install --cask 1password
 brew install --cask claude
 brew install --cask claude-code
 brew install --cask google-chrome # needed sometimes for playwright/browser automation
+brew install direnv
+
 
 # Log into App Store before running this
 
@@ -85,7 +87,10 @@ brew install --cask google-chrome # needed sometimes for playwright/browser auto
 #brew install mas # mas can only install apps you've already "purchased" (free or paid) with your Apple ID, so make sure to log in to the App Store and "purchase" Xcode (it's free) before running this command.
 #mas install 497799835 # Xcode (for command line tools and simulators)
 
-
+# Git Setup
+git config --global user.name "Scott Stout"
+git config --global user.email "scott.stout@framedata.ai"
+git config --global init.defaultBranch main
 
 # ── 11. Post-brew: Claude Code ──
 #echo ""
