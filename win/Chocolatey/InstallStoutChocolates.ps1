@@ -28,6 +28,9 @@ refreshenv
 
 choco install git -y
 choco install nodejs -y
+choco install wiztree -y
+choco install starship -y
+choco install nerd-fonts-firacode -y
 #choco install googlechrome -y
 choco install python -y
 choco install azure-cli -y
@@ -65,4 +68,25 @@ code --install-extension ban.spellright
 
 #Install Az for PowerShell
 Install-Module -Name Az -AllowClobber
+
+# In Terminal - Update the profile to auto-load the config;
+notepad $PROFILE
+
+# if that gives and error, create the profile:
+New-Item -Path $PROFILE -Type File -Force
+
+# add this to the the file
+#oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\gruvbox.omp.json" | Invoke-Expression
+Invoke-Expression (&starship init powershell)
+
+#VSCode — settings.json:
+#````json
+#"terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
+#"editor.fontFamily": "'JetBrainsMono Nerd Font', Consolas, monospace"
+#````
+#Windows Terminal — Settings → your PowerShell profile → Appearance → Font face, pick the Nerd Font.
+#Gotcha on font names: the installed family name isn't always the package name. After install, check the actual name with:
+#powershell[System.Drawing.Text.InstalledFontCollection]::new().Families | Where-Object Name -like '*Nerd*'
+#Use that exact string in your settings. JetBrains Mono, for example, installs as JetBrainsMono Nerd Font (no space between "JetBrains" and "Mono"), which trips people up.
+#Once configured, restart VSCode / Windows Terminal and starship's git branches, folder icons, and language symbols will render instead of showing as boxes.
 

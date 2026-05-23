@@ -11,7 +11,7 @@ sudo Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 
 # Install some tools with Scoop
 scoop install git
 git config --global user.name "Scott Stout"
-git config --global user.email "scott.stout@framedata.ai"
+git config --global user.email "scott.a.stout@gmail.com"
 
 scoop install dark
 scoop intsll innounp

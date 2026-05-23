@@ -54,6 +54,8 @@ code --install-extension streetsidesoftware.code-spell-checker
 # ── UI & Themes ──
 code --install-extension pkief.material-icon-theme
 code --install-extension zhuangtongfa.material-theme  # One Dark Pro
+code --install-extension Catppuccin.catppuccin-vsc
+code --install-extension Catppuccin.catppuccin-vsc-icons
 
 echo ""
 echo "Done! Open VSCode and:"
