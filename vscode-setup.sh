@@ -62,3 +62,6 @@ echo "Done! Open VSCode and:"
 echo "  1. Cmd+Shift+P → 'Python: Select Interpreter' → pick your pyenv version"
 echo "  2. Sign into Claude Code: run 'claude' in terminal"
 echo "  3. Sign into GitHub Copilot via the accounts menu (bottom left)"
+echo "  4. Activate Theme In VSCode:: Ctrl+K Ctrl+T → "Catppuccin Mocha" (or One Dark Pro)"
+echo "  5. Activate File Icons in VSCode: Ctrl+Shift+P → "File Icon Theme" → "Catppuccin Mocha""
+
