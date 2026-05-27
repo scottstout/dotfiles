@@ -39,6 +39,7 @@ reg import "C:\Users\ScottStout\scoop\apps\7zip\current\install-context.reg"
 
 scoop install uv
 scoop install nodejs
+scoop install gh
 #scoop install vscode
 
 # Best to install vscode manuall so it can automatically update
