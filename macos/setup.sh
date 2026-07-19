@@ -21,22 +21,35 @@ brew install gh           # GitHub CLI
 brew install wget
 brew install curl
 brew install gnupg        # GPG for git commit signing
+brew install az           # Azure CLI
+brew install azd          # Azure Developer CLI
+azd extension install azure.ai.agents # Foundry AI Agents extension for Azure Developer CLI
+brew install powershell
+brew tap databricks/tap
+brew install databricks
+databricks aitools install # might install per folder
+brew install marp-cli
+brew install supacode
+
 
 # ── 3. Version Managers ──
 brew install nvm           # Node version manager
-brew install pyenv         # Python version manager
-brew install pyenv-virtualenv
-brew install uv
+#brew install pyenv         # Python version manager
+#brew install pyenv-virtualenv
+brew install uv 
+brew install d2 # database diagram visualization (more capable than mermaid)
+
 
 
 # ── 4. Runtimes (via version managers after install) ──
 # After this script, run:
    nvm install --lts
-   pyenv install 3.12
-   pyenv global 3.12
+#   pyenv install 3.12 # I think I prefer just installing python via uv
+#   pyenv global 3.12 # I think I prefer just installing python via uv
 
 # ── 5. Python ML/AI Dependencies (system-level) ──
-brew install miniforge    # Conda for ML environments
+#brew install miniforge    # Conda for ML environments
+brew install direnv
 
 # ── 6. Terminal Enhancements ──
 brew install starship     # Shell prompt
@@ -78,7 +91,13 @@ brew install --cask 1password
 brew install --cask claude
 brew install --cask claude-code
 brew install --cask google-chrome # needed sometimes for playwright/browser automation
-brew install direnv
+brew install --cask drawio
+brew install --cask linearmouse # scroll mouse wheel to zoom in/out
+brew install --cask darrylmorley/whatcable/whatcable
+rew install --cask betterdisplay
+
+
+
 
 
 # Log into App Store before running this

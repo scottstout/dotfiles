@@ -1,0 +1,37 @@
+# This is a list of items to be installed (and the commands to install most of them). 
+# This list is not intended to be run in a single execution. 
+
+# Install a modern Powershell (much newer than the one that is on windows by default)
+winget install --id Microsoft.PowerShell --source winget
+
+# Install Scoop
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+iwr -useb get.scoop.sh | iex
+
+# In the Windows UI turn on Developer Mode (Settings > Update & Security > For Developers > Developer Mode)
+sudo Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
+
+# Install some tools with Scoop
+scoop install git
+scoop install dark
+scoop install innounp # package browser for scoop
+scoop install sudo
+scoop bucket add extras # adds ability to install from 'extras' (e.g. databricks cli uses this)
+
+scoop checkup # validates that scoop is set up for success
+scoop bucket add nerd-fonts
+scoop install nerd-fonts/Meslo-NF
+scoop install nerd-fonts/Meslo-NF-Mono
+scoop install main/terraform
+scoop install main/starship
+scoop install main/azure-cli
+scoop install extras/databricks-cli
+scoop install uv
+scoop install gh # github cli
+scoop install main/copilot-cli
+
+# Manually go into terminal defaults > Appearance and set the font to MesloLGL NF Mono 
+# Install Visual Studio Code manually (so it can patch itself)
+# Install M365 Copilot manually
+# Install M365 Office manually
+# In the Windows UI turn on Developers Mode (Settings > Update & Security > For Developers > Developer Mode)
