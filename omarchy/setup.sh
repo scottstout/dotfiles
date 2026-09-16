@@ -52,11 +52,11 @@ omarchy pkg add go
 omarchy pkg add d2                  # diagrams; more capable than mermaid
 
 # ── 5. Data & docs tooling ──
-# All three exist in the AUR as x86_64-only builds, so they come from mise
-# instead, which pulls the vendors' own linux-arm64 releases.
-mise use -g databricks-cli          # not packaged for Arch at all
-mise use -g marp-cli                # AUR marp-cli is arch=(x86_64)
-mise use -g powershell              # AUR powershell-bin is arch=('x86_64')
+omarchy pkg aur add powershell-bin  # arch=(x86_64 armv7h aarch64); pulls MS's
+                                    # own linux-arm64 tarball
+mise use -g databricks-cli          # not in the AUR at all
+mise use -g marp-cli                # AUR marp-cli is arch=(x86_64) with no
+                                    # arm64 source, so take the Node build
 
 # ── 6. Editors ──
 # These wire the app into the current Omarchy theme, which a raw AUR install

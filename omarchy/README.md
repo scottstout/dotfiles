@@ -50,13 +50,27 @@ vary — read the PKGBUILD's `arch=()` rather than assuming:
 
 | Package | `arch=()` | On ARM |
 |---|---|---|
+| `powershell-bin` | `x86_64 armv7h aarch64` | works |
+| `visual-studio-code-bin` | `x86_64 aarch64 armv7h` | works |
 | `drawio-desktop-bin` | `x86_64 aarch64` | works |
 | `claude-desktop` | `x86_64 aarch64` | works |
+| `marp-cli` | `x86_64` | no — use mise |
 | `obsidian-bin` | `x86_64` | no |
 | `bruno`, `bruno-bin` | `x86_64` | no |
-| `marp-cli` | `x86_64` | use mise instead |
-| `powershell-bin` | `x86_64` | use mise instead |
-| `visual-studio-code-bin` | `x86_64` | use `omarchy install editor vscode` |
+
+Check it yourself rather than trusting a version number — `yay -Si` does not show
+the arch line, so read the PKGBUILD:
+
+```bash
+yay -Gp <package> | grep -E '^arch=|^source_aarch64'
+```
+
+A `source_aarch64=` line is the real tell: it means the packager wired up an
+upstream arm64 artifact. `arch=()` alone can list `aarch64` in theory, but
+without a matching source the build has nothing to fetch.
+
+VS Code installs fine from the AUR on ARM; `omarchy install editor vscode` is
+still preferred, but for theme integration, not architecture.
 
 Where the AUR build is x86_64-only but the vendor ships a linux-arm64 release,
 mise is the way through — that covers `marp-cli`, `powershell` and
