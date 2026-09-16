@@ -44,11 +44,11 @@ mise use -g uv                      # also available as `omarchy pkg add uv`
 omarchy pkg add go
 
 # ── 4. CLI tools Omarchy does not ship ──
-omarchy pkg add lazygit
-omarchy pkg add httpie
-omarchy pkg add tree
-omarchy pkg add wget
-omarchy pkg add gnupg               # commit signing
+#omarchy pkg add lazygit
+#omarchy pkg add httpie
+#omarchy pkg add tree
+#omarchy pkg add wget
+#omarchy pkg add gnupg               # commit signing
 omarchy pkg add d2                  # diagrams; more capable than mermaid
 
 # ── 5. Editors ──
