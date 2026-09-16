@@ -94,7 +94,7 @@ brew install --cask google-chrome # needed sometimes for playwright/browser auto
 brew install --cask drawio
 brew install --cask linearmouse # scroll mouse wheel to zoom in/out
 brew install --cask darrylmorley/whatcable/whatcable
-rew install --cask betterdisplay
+brew install --cask betterdisplay
 
 
 

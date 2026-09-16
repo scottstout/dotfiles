@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Re-apply the agent-continue patch after `omarchy update`.
+#
+# /usr/bin/omarchy-agent is owned by try-omarchy-runtime, so a package upgrade
+# restores the stock version and drops the patch. This runs in the update's own
+# terminal, where sudo can ask for a password if its timestamp has expired.
+#
+# Install to ~/.config/omarchy/hooks/post-update.d/10-agent-continue
+
+[[ -x /usr/local/bin/omarchy-agent-continue-patch ]] || exit 0
+sudo /usr/local/bin/omarchy-agent-continue-patch

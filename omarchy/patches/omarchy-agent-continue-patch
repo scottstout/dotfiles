@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Re-apply the "agent resumes the last conversation" patch to
+# /usr/bin/omarchy-agent.
+#
+# That file is owned by try-omarchy-runtime, so any package upgrade restores the
+# stock version. ~/.config/omarchy/hooks/post-update.d runs this again after
+# every `omarchy update` to put the patch back.
+#
+# Idempotent. If omarchy-agent ever stops matching the shape this expects, the
+# patch is skipped with a message rather than guessed at, so a future upstream
+# rewrite can never break an update or corrupt the script.
+
+set -uo pipefail
+
+target=/usr/bin/omarchy-agent
+marker='# omarchy-patch: agent-continue'
+anchor='  command=(claude --permission-mode auto)'
+
+if [[ $EUID -ne 0 ]]; then
+  echo "omarchy-agent-continue-patch must run as root (sudo or pkexec)" >&2
+  exit 1
+fi
+
+[[ -f $target ]] || { echo "Missing $target" >&2; exit 1; }
+
+# Already patched, including the case where nothing has upgraded since.
+grep -qF "$marker" "$target" && exit 0
+
+if ! grep -qxF "$anchor" "$target"; then
+  echo "omarchy-agent no longer matches the expected shape; continue patch skipped." >&2
+  exit 0
+fi
+
+block=$(mktemp) || exit 1
+tmp=$(mktemp) || exit 1
+trap 'rm -f "$block" "$tmp"' EXIT
+
+cat > "$block" <<'PATCH'
+  # omarchy-patch: agent-continue
+  # Launched from the keybinding or menu: resume this directory's most recent
+  # conversation rather than starting a new one. --continue exits immediately
+  # where there is none, which from a keypress looks like a window that never
+  # opened, so only ask for it when a session file is actually on disk. If that
+  # layout ever changes the check stops matching and a fresh session starts.
+  if [[ $pick == "true" ]] && compgen -G "$HOME/.claude/projects/${PWD//\//-}/*.jsonl" >/dev/null; then
+    command+=(--continue)
+  fi
+PATCH
+
+sed "/^  command=(claude --permission-mode auto)\$/r $block" "$target" > "$tmp" || exit 1
+
+# Never install something that would not parse: a broken omarchy-agent is a
+# keybinding that dies silently and a menu entry that does nothing.
+if ! bash -n "$tmp"; then
+  echo "Patched omarchy-agent failed to parse; leaving the original in place." >&2
+  exit 1
+fi
+
+[[ -f $target.orig ]] || cp -a "$target" "$target.orig"
+install -m 755 -o root -g root "$tmp" "$target"
+echo "Applied agent-continue patch to $target"
