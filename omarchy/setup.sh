@@ -51,40 +51,54 @@ omarchy pkg add go
 #omarchy pkg add gnupg               # commit signing
 omarchy pkg add d2                  # diagrams; more capable than mermaid
 
-# ── 5. Editors ──
+# ── 5. Data & docs tooling ──
+# All three exist in the AUR as x86_64-only builds, so they come from mise
+# instead, which pulls the vendors' own linux-arm64 releases.
+mise use -g databricks-cli          # not packaged for Arch at all
+mise use -g marp-cli                # AUR marp-cli is arch=(x86_64)
+mise use -g powershell              # AUR powershell-bin is arch=('x86_64')
+
+# ── 6. Editors ──
 # These wire the app into the current Omarchy theme, which a raw AUR install
 # does not. VS Code is not in the Arch repos at all.
 omarchy install editor vscode
 #omarchy install editor zed
 # VS Code extensions and settings are cross-platform — see ../vscode-setup.sh
 
-# ── 6. Services ──
+# ── 7. GUI apps ──
+omarchy pkg aur add drawio-desktop-bin   # PKGBUILD is arch=('x86_64' 'aarch64')
+#omarchy pkg aur add claude-desktop      # also arch=('x86_64' 'aarch64')
+
+# ── 8. Services ──
 omarchy install service 1password
 omarchy install service tailscale
 #omarchy install service sunshine   # remote desktop; also opens the Moonlight
                                     # streaming ports for LAN and Tailscale.
                                     # Uncomment on a machine you remote into.
 
-# ── 7. Browsers ──
+# ── 9. Browsers ──
 # Omarchy ships Chromium. Add another only if you need it.
 #omarchy install browser chrome     # sometimes needed for playwright automation
 
-# ── 8. Git identity ──
+# ── 10. Git identity ──
 git config --global user.name "Scott Stout"
 git config --global user.email "scott.stout@framedata.ai"
 git config --global init.defaultBranch main
 
-# ── 9. Agent keybinding ──
+# ── 11. Agent keybinding ──
 # Makes Omarchy's own SUPER+SHIFT+CTRL+A resume the last conversation instead of
-# starting a new one. See patches/README notes in ../omarchy/README.md.
+# starting a new one. See ./README.md.
 #./patches/install.sh
 
-# ── 10. Not available on aarch64, or not verified ──
-# powershell   — AUR powershell-bin is x86_64 only; mise has aqua:PowerShell
-# obsidian     — not in the repos; AUR build unverified on ARM
-# databricks   — not packaged; install from the vendor script
-# marp-cli     — npm install -g @marp-team/marp-cli
-# betterdisplay, linearmouse, whatcable — macOS only, no Linux equivalent needed
+# ── 12. x86_64 only ──
+# These are fine on a bare-metal Omarchy box and simply cannot be installed
+# under Try Omarchy on Apple Silicon. Uncomment on an x86 machine.
+#omarchy pkg aur add obsidian-bin   # arch=('x86_64')
+#omarchy pkg aur add bruno-bin      # arch=('x86_64'); httpie above covers most of it
+
+# ── 13. Not packaged anywhere ──
+# supacode  — not in the AUR or the mise registry; install from the vendor.
+# betterdisplay, linearmouse, whatcable — macOS only, no Linux counterpart needed.
 
 echo
 echo "Done. Next:"

@@ -42,12 +42,25 @@ result with `bash -n` before installing, and skips itself with a message if
 `omarchy-agent` ever stops matching the shape it expects — so a future upstream
 rewrite cannot break an update.
 
-## Not available on aarch64
+## aarch64
 
-Relevant when running under Try Omarchy on Apple Silicon. `powershell-bin`,
-`visual-studio-code-bin` and most other AUR `-bin` packages are x86_64 only.
-VS Code has a working path via `omarchy install editor vscode`; PowerShell is
-better served by mise's `aqua:PowerShell` backend.
+Relevant only under Try Omarchy on Apple Silicon; everything below is fine on a
+bare-metal x86 Omarchy box. AUR `-bin` packages are the thing to check, and they
+vary — read the PKGBUILD's `arch=()` rather than assuming:
+
+| Package | `arch=()` | On ARM |
+|---|---|---|
+| `drawio-desktop-bin` | `x86_64 aarch64` | works |
+| `claude-desktop` | `x86_64 aarch64` | works |
+| `obsidian-bin` | `x86_64` | no |
+| `bruno`, `bruno-bin` | `x86_64` | no |
+| `marp-cli` | `x86_64` | use mise instead |
+| `powershell-bin` | `x86_64` | use mise instead |
+| `visual-studio-code-bin` | `x86_64` | use `omarchy install editor vscode` |
+
+Where the AUR build is x86_64-only but the vendor ships a linux-arm64 release,
+mise is the way through — that covers `marp-cli`, `powershell` and
+`databricks-cli` (which isn't in the AUR at all).
 
 ## Related
 
