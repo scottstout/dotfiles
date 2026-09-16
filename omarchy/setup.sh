@@ -60,7 +60,6 @@ mise use -g azd                     # Azure Developer CLI; not packaged for Arch
 
 # ── 2. Infrastructure ──
 omarchy pkg add terraform
-omarchy install docker dbs          # Docker + a dev-configured database container
 
 # ── 3. Languages & runtimes ──
 # Via mise so versions can differ per project. `omarchy install dev-env <lang>`
@@ -84,45 +83,52 @@ mise use -g databricks-cli          # not in the AUR at all
 mise use -g marp-cli                # AUR marp-cli is arch=(x86_64) with no
                                     # arm64 source, so take the Node build
 
-# ── 6. Editors ──
+# ── 6. Dev Services ──
+# Commented out to match macos/setup.sh, where postgresql, redis and sqlite are
+# all commented too. Omarchy runs these as Docker containers with development
+# defaults rather than as system services, and the installer prompts for which
+# database — so it is interactive, and it pulls Docker in with it.
+#omarchy install docker dbs
+
+# ── 7. Editors ──
 # These wire the app into the current Omarchy theme, which a raw AUR install
 # does not. VS Code is not in the Arch repos at all.
 omarchy install editor vscode
 #omarchy install editor zed
 # VS Code extensions and settings are cross-platform — see ../vscode-setup.sh
 
-# ── 7. GUI apps ──
+# ── 8. GUI apps ──
 omarchy pkg aur add drawio-desktop-bin   # PKGBUILD is arch=('x86_64' 'aarch64')
 #omarchy pkg aur add claude-desktop      # also arch=('x86_64' 'aarch64')
 
-# ── 8. Services ──
+# ── 9. Services ──
 omarchy install service 1password
 omarchy install service tailscale
 #omarchy install service sunshine   # remote desktop; also opens the Moonlight
                                     # streaming ports for LAN and Tailscale.
                                     # Uncomment on a machine you remote into.
 
-# ── 9. Browsers ──
+# ── 10. Browsers ──
 # Omarchy ships Chromium. Add another only if you need it.
 #omarchy install browser chrome     # sometimes needed for playwright automation
 
-# ── 10. Git identity ──
+# ── 11. Git identity ──
 git config --global user.name "Scott Stout"
 git config --global user.email "scott.stout@framedata.ai"
 git config --global init.defaultBranch main
 
-# ── 11. Agent keybinding ──
+# ── 12. Agent keybinding ──
 # Makes Omarchy's own SUPER+SHIFT+CTRL+A resume the last conversation instead of
 # starting a new one. See ./README.md.
 #./patches/install.sh
 
-# ── 12. x86_64 only ──
+# ── 13. x86_64 only ──
 # These are fine on a bare-metal Omarchy box and simply cannot be installed
 # under Try Omarchy on Apple Silicon. Uncomment on an x86 machine.
 #omarchy pkg aur add obsidian-bin   # arch=('x86_64')
 #omarchy pkg aur add bruno-bin      # arch=('x86_64'); see httpie in section 4
 
-# ── 13. Not packaged anywhere ──
+# ── 14. Not packaged anywhere ──
 # supacode  — not in the AUR or the mise registry; install from the vendor.
 # betterdisplay, linearmouse, whatcable — macOS only, no Linux counterpart needed.
 
