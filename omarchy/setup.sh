@@ -85,9 +85,17 @@ mise use -g marp-cli                # AUR marp-cli is arch=(x86_64) with no
 
 # ── 6. Dev Services ──
 # Commented out to match macos/setup.sh, where postgresql, redis and sqlite are
-# all commented too. Omarchy runs these as Docker containers with development
-# defaults rather than as system services, and the installer prompts for which
-# database — so it is interactive, and it pulls Docker in with it.
+# all commented too. Nothing else here needs a database — terraform certainly
+# does not.
+#
+# Note what this command is: it prompts for a database and then goes straight to
+# `sudo docker run`. It does NOT install Docker, it requires it. On a machine
+# without Docker it fails at the first command, and under `set -e` that takes
+# the rest of this script with it.
+#
+# Install Docker first if you want one:
+#   omarchy pkg add docker
+#   sudo systemctl enable --now docker
 #omarchy install docker dbs
 
 # ── 7. Editors ──
