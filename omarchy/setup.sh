@@ -22,6 +22,32 @@
 # `mise use -g` is a no-op when the tool is already at that version.
 #
 # Prompts for sudo, so run it from a terminal, not from a launcher.
+#
+# ----------------------------------------------------------------------------
+# BEFORE ADDING AN AUR PACKAGE: check it builds for your architecture.
+#
+#   yay -Gp <package> | grep -E '^arch=|^source_aarch64'
+#
+# `yay -Si` does NOT print the arch line, so a version number coming back tells
+# you nothing about ARM. Read the PKGBUILD.
+#
+#   arch=(x86_64 armv7h aarch64)                 <- claims support
+#   source_aarch64=(...linux-arm64.tar.gz)       <- and actually has a source
+#
+# Both lines matter. arch=() can list aarch64 with no matching source, in which
+# case the build has nothing to fetch. A `source_aarch64=` pointing at an
+# upstream arm64 artifact is the real signal.
+#
+# Upstream shipping an arm64 build is NOT enough on its own — someone has to
+# package it. PowerShell and VS Code both ship arm64 and are both packaged for
+# it; Obsidian and Bruno ship arm64 builds that nobody has packaged.
+#
+# Official repos need no check at all. This machine's mirrorlist is
+# mirror.archlinuxarm.org, so anything `pacman -Si` can find is already built
+# for aarch64 — an x86-only package is not in the database to be found.
+#
+# Only matters under Try Omarchy on Apple Silicon. On an x86 box it is moot.
+# ----------------------------------------------------------------------------
 
 set -e   # macos/setup.sh omits this, which is how a typo lived there unnoticed
 
