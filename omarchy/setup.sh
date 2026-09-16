@@ -94,7 +94,7 @@ git config --global init.defaultBranch main
 # These are fine on a bare-metal Omarchy box and simply cannot be installed
 # under Try Omarchy on Apple Silicon. Uncomment on an x86 machine.
 #omarchy pkg aur add obsidian-bin   # arch=('x86_64')
-#omarchy pkg aur add bruno-bin      # arch=('x86_64'); httpie above covers most of it
+#omarchy pkg aur add bruno-bin      # arch=('x86_64'); see httpie in section 4
 
 # ── 13. Not packaged anywhere ──
 # supacode  — not in the AUR or the mise registry; install from the vendor.
